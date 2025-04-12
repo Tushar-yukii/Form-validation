@@ -1,21 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 
 function App() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
-      <div className="bg-white rounded-2xl shadow-xl max-w-4xl w-full grid grid-cols-1 md:grid-cols-1 overflow-hidden">
-        {/* Illustration Section */}
+  const [fullname, setFullname] = useState("");
 
+  const submithandler = (e) => {
+    //form handling not re-render the page
+    e.preventDefault();
+    console.log("submitted");
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center ">
+      <div className="bg-white rounded-2xl shadow-xl max-w-sm w-full ">
         {/* Form Section */}
         <div className="p-8">
           <h2 className="text-2xl font-bold mb-6 text-gray-800">
             Create an account
           </h2>
-          <form className="space-y-4">
+          <form
+            onSubmit={(e) => {
+              submithandler(e);
+            }}
+            className="space-y-4"
+          >
             <input
               type="text"
               placeholder="Enter your name"
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500"
+              value={fullname}
+              onChange={(e) => {
+                setFullname(e.target.value);
+              }}
             />
             <input
               type="email"
@@ -49,7 +64,7 @@ function App() {
             <div className="flex space-x-4">
               <button
                 type="submit"
-                className="bg-violet-600 text-white px-6 py-2 rounded-md hover:bg-violet-700 transition"
+                className="bg-violet-600 text-white text-sm px-4 py-2 rounded-md hover:bg-violet-700 transition"
               >
                 Submit
               </button>
